@@ -1,20 +1,11 @@
 <template>
-<div class="b" v-for="a in number" >
-  {{ a }}
-<!--  <img src="../assets/{{ a }}.jpg" />-->
-</div>
+<div class="b" ></div>
 </template>
 
 <script>
 import {defineComponent} from "vue";
 export default defineComponent({
   name:'leftbox',
-  props:{
-    number:{
-      type:Object,
-      required:true
-    }
-  }
 })
 
 </script>

@@ -2,7 +2,7 @@
   <div class="home">
     <div class="box">
       <div class="box_leftbox">
-        <leftbox :number="number" ></leftbox>
+        <leftbox ></leftbox>
       </div>
       <div class="box_rightbox">
         <rightbox/>
@@ -17,23 +17,65 @@
 
 import leftbox from "@/components/leftbox";
 import rightbox from "@/components/rightbox";
+import {defineComponent,computed,ref} from "vue";
 import {useStore} from 'vuex';
-export default {
+export default defineComponent({
   name: 'HomeView',
   components: {
     rightbox,
     leftbox
   },
-  setup(){
-    let store=useStore()
-    let number = computed(()=>{
-      return store.state.number
-    })
-    return{
-      number
+  mounted() {
+    let b=document.querySelector(".b")
+    let d=document.getElementsByClassName("d")
+    let time
+    let index=0
+    let a=function(){
+        for(let i=0;i<d.length;i++){
+            d[i].className="d"
+        }
     }
+    let aa= function (){
+        a()
+        d[index].className="d dd"
+    }
+    let arr=[
+           "static/img/1.d4ed8fb3.jpg",
+           "static/img/2.86794d1c.jpg",
+           "static/img/3.b2ac04c1.jpg",
+           "static/img/4.3c4766d4.jpg",
+           "static/img/5.0d3d9045.jpg"
+       ]
+    function ts(){
+        time=setInterval(function (){
+            aa()
+            index++
+            if(index===5){
+                index=0
+            }
+            console.log(index)
+            b.style.backgroundImage="url(" +[arr[index]]+ ") "
+
+        },2000)
+    }
+    for(let i=0;i<d.length;i++){
+        d[i].onmousemove=function (){
+            b.style.backgroundImage="url(" +[arr[i+1]]+ ") "
+            a()
+            clearInterval(time)
+            index=i+1
+            ts()
+        }
+
+    }
+    ts()
+  },
+  methods:{
+
   }
-}
+
+})
+
 </script>
 
 <style>
